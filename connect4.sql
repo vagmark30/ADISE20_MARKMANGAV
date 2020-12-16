@@ -20,7 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `connect4`
 --
+DELIMITER $$
+--
+-- Διαδικασίες
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_board` ()  BEGIN
+		UPDATE `board` SET `pawn_color`=null;
+		update `players` set `nickname`=null, `token`=null;
+		update `game_status` set `status`='not active', `p_turn`=null, `result`=null;
+END$$
 
+DELIMITER ;
 -- --------------------------------------------------------
 
 --

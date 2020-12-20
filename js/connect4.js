@@ -17,12 +17,18 @@ board += '</table>'
 $('#connect4_board_div').html(board);
 }
 
-function fill_board(){
-  $.ajax({url: "connect4.php/board/", success: fill_board_with_data });
+function fill_board() {
+    $.ajax({
+        url: "connect4.php/board/",
+        method: 'GET',
+        dataType: 'json',
+        complete: fill_board_with_data
+    });
 }
 
 function fill_board_with_data(data){
-  for(var i=0; data.length ; i++){
+  var d= JSON.stringify(data.responseText);
+  for(var i=0; d.length ; i++){
     var o = data[i];
     var id = '#square_'+o.x +'_'+o.y;
     //var c = (o.piece!=null)?o.piece_color+o.piece:'';

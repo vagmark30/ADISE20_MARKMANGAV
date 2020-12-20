@@ -1,7 +1,9 @@
 <?php
 require_once "local_config.php";
+$DB_USER = "root";
+$DB_PASS = "";
 
-$host='localhost:8080'; //vag esy to allazeis auto se localhost sketo.
+$host='localhost'; //vag esy to allazeis auto se localhost sketo.
 $db = 'connect4';
 $user=$DB_USER;
 $pass=$DB_PASS;

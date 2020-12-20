@@ -1,7 +1,7 @@
 <?php
 
 function show_users(){
-  global mysqli;
+  global $mysqli;
   $query = 'select nickname,piece_color from players';
   $st = $mysqli->prepare($sql);
   $st->execute();
@@ -11,7 +11,7 @@ function show_users(){
 }
 
 function show_user($color){
-  global mysqli;
+  global $mysqli;
   $query = 'select nickname,piece_color from players where piece_color=?';
   $st = $mysqli->prepare($sql);
   $st->blind_param('s',$color);
@@ -23,7 +23,7 @@ function show_user($color){
 
 function set_user(){
   //elegxous gia ton user
-  //dinw token ston user me update 
+  //dinw token ston user me update
 }
 
 function handle_user(){

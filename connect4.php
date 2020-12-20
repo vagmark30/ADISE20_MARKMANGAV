@@ -22,6 +22,7 @@ switch($r=array_shift($request)){
           handle_board($method, $input);
           break;
     }
+    break;
   case 'status' :
     if(sizeof($request)==0){
       show_status();

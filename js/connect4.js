@@ -22,13 +22,15 @@ function fill_board() {
         url: "connect4.php/board/",
         method: 'GET',
         dataType: 'json',
-        complete: fill_board_with_data
+        success: fill_board_with_data,
+        error: fill_board_errored
     });
 }
-
+function fill_board_errored(data){
+  console.log(data);
+}
 function fill_board_with_data(data){
-  var d= JSON.stringify(data.responseText);
-  for(var i=0; d.length ; i++){
+  for(var i=0; i<data.length ; i++){
     var o = data[i];
     var id = '#square_'+o.x +'_'+o.y;
     //var c = (o.piece!=null)?o.piece_color+o.piece:'';

@@ -1,6 +1,7 @@
 $(function() {
     draw_empty_board();
     fill_board();
+  	$('#connect4_login').click( login_to_game);
 });
 
 function draw_empty_board(p) {
@@ -50,7 +51,6 @@ function login_to_game(){
   $.ajax({
     url: "connect4.php/players/"+chooseColor,
     method: 'PUT',
-    dataType: 'json',
     contentType: 'application/json',
     data: JSON.stringify({ nickname: $('#username').val(), pawn_color: $('#chooseColor').val() }),
     success: login_res,
@@ -61,10 +61,15 @@ function login_to_game(){
 function login_res(data){
   mes = data[0];
   $('#game_initializer').hide();
+  console.log("mphke");
   //updates
 }
 
 function login_er(data,y,z,c){
   var x = data.responseJSON;
-  alert(x.console.error());
+  console.log(data);
+  console.log(x);
+  console.log(y);
+  console.log(z);
+  console.log(c);
 }

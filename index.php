@@ -17,8 +17,22 @@
   </select>
   <button id='connect4_login'>ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button>
 </div>
-<div id='move_div'>
-  
+<div>
+    <div id='gamepad'>
+        <div>
+            Eπέλεξε την στήλη που θέλεις να τοποθετήσεις τον δίσκο:<br>
+            <select id='col_move'>
+                <option value="1">Στήλη 1</option>
+                <option value="2">Στήλη 2</option>
+                <option value="3">Στήλη 3</option>
+                <option value="4">Στήλη 4</option>
+                <option value="5">Στήλη 5</option>
+                <option value="6">Στήλη 6</option>
+                <option value="7">Στήλη 7</option>
+            </select>
+            <button id="play_btn">ΠΑΙΞΕ</button>
+        </div>
+    </div>
 </div>
 <div id="connect4_board_div">
 

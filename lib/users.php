@@ -35,6 +35,25 @@ function show_user($color){
 function set_user($input){
 
   //elegxous gia ton user
+  if(!isset($input['nickname'])) {
+  header("HTTP/1.1 400 Bad Request");
+  print json_encode(['errormesg'=>"No nickname given."]);
+  exit;
+}
+$nickname=$input['nickname'];
+$piece_color = $input['piece_color'];
+global $mysqli;
+$sql = 'select count(*) as c from players where piece_color=? and nickname is not null';
+$st = $mysqli->prepare($sql);
+$st->bind_param('s',$piece_color);
+$st->execute();
+$res = $st->get_result();
+$r = $res->fetch_all(MYSQLI_ASSOC);
+if($r[0]['c']>0) {
+  header("HTTP/1.1 400 Bad Request");
+  print json_encode(['errormesg'=>"This color is already used. Please select another color."]);
+  exit;
+}
   //dinw token ston user me update
   $nickname = $input['nickname'];
   $piece_color = $input['piece_color'];
@@ -54,7 +73,4 @@ function set_user($input){
   print json_encode($res4->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
 
-function handle_user(){
-
-}
 ?>

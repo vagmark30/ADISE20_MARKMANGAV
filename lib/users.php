@@ -3,11 +3,22 @@
 function show_users(){
   global $mysqli;
   $query = 'select nickname,piece_color from players';
-  $st = $mysqli->prepare($sql);
+  $st = $mysqli->prepare($query);
   $st->execute();
   $result = $st->get_result();
   header('Content-type: application/json');
   print json_encode($result->fetch_all(MYSQLI_ASSOC),JSON_PRETTY_PRINT);
+}
+
+//an vrei null stous players petaei error
+function show_users_active(){
+  global $mysqli;
+  $query = 'select count(*) as p from players where nickname is not null';
+  $st = $mysqli->prepare($query);
+  $st->execute();
+  $result = $st->get_result();
+  $active_players = $result->fetch_assoc()['p'];
+  return($active_players);
 }
 
 function show_user($color){
@@ -33,7 +44,7 @@ function set_user($input){
   $st3->bind_param('sss', $nickname, $nickname, $piece_color);
   $st3->execute();
 
-  //update_status();
+  update_game_status();
   $sql4 = 'select * from players where piece_color=?';
   $st4 = $mysqli->prepare($sql4);
   $st4->bind_param('s', $piece_color);

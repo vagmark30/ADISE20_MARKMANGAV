@@ -48,7 +48,7 @@ function handle_board($method,$input){
 
 function handle_player($method,$input){
   if ($method == 'GET') {
-      show_user($input['pawn_color']);
+      show_user($input['piece_color']);
   } else if ($method == 'PUT') {
       set_user($input);
   }

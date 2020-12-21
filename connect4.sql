@@ -25,7 +25,7 @@ DELIMITER $$
 -- Διαδικασίες
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_board` ()  BEGIN
-		UPDATE `board` SET `pawn_color`=null;
+		UPDATE `board` SET `piece_color`=null;
 		update `players` set `nickname`=null, `token`=null;
 		update `game_status` set `status`='not active', `p_turn`=null, `result`=null;
 END$$

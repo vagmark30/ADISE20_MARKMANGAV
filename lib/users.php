@@ -26,12 +26,10 @@ function set_user($input){
   //elegxous gia ton user
   //dinw token ston user me update
   $nickname = $input['nickname'];
-  $piece_color = $input['pawn_color'];
+  $piece_color = $input['piece_color'];
   global $mysqli;
   $sql3 = 'update players set nickname=?, token=md5(CONCAT( ?, NOW())) where piece_color=?';
   $st3 = $mysqli->prepare($sql3);
-  echo $nickname;
-  echo $piece_color;
   $st3->bind_param('sss', $nickname, $nickname, $piece_color);
   $st3->execute();
 

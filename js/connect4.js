@@ -53,7 +53,7 @@ function login_to_game(){
     method: 'PUT',
     dataType: "json",
     contentType: 'application/json',
-    data: JSON.stringify({ nickname: $('#username').val(), pawn_color: chooseColor }),
+    data: JSON.stringify({ nickname: $('#username').val(), piece_color: chooseColor }),
     success: login_res,
     error: login_er
   })

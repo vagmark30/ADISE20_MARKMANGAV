@@ -29,13 +29,11 @@ switch($r=array_shift($request)){
       show_status();
       break;
   case 'players':
-      switch ($r = array_shift($request)) {
-          case '':
-              handle_player($method, $input);
-              break;
-      }
+      handle_player($method, $input);
       break;
-  default: header("HTTP/1.1 404 Not Found");
+  default:
+    header("HTTP/1.1 404 Not Found");
+    print json_encode(['errormsg'=>"Problem with the API."]);
     exit;
 }
 
@@ -48,7 +46,7 @@ function handle_board($method,$input){
   }
 }
 
-function handle_player($method,$request,$input){
+function handle_player($method,$input){
   if ($method == 'GET') {
       show_user($input['pawn_color']);
   } else if ($method == 'PUT') {

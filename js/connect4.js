@@ -49,10 +49,11 @@ function login_to_game(){
   fill_board();
 
   $.ajax({
-    url: "connect4.php/players/"+chooseColor,
+    url: "connect4.php/players/",
     method: 'PUT',
+    dataType: "json",
     contentType: 'application/json',
-    data: JSON.stringify({ nickname: $('#username').val(), pawn_color: $('#chooseColor').val() }),
+    data: JSON.stringify({ nickname: $('#username').val(), pawn_color: chooseColor }),
     success: login_res,
     error: login_er
   })
@@ -62,6 +63,7 @@ function login_res(data){
   mes = data[0];
   $('#game_initializer').hide();
   console.log("mphke");
+  console.log(data);
   //updates
 }
 

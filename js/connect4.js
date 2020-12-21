@@ -8,6 +8,7 @@ $(function() {
     draw_empty_board();
     fill_board();
   	$('#connect4_login').click( login_to_game);
+    $('#connect4_reset').click( reset_game);
 });
 
 function draw_empty_board(p) {
@@ -51,8 +52,8 @@ function fill_board_with_data(data){
 }
 
 function login_to_game(){
-  if($('#username').val()==''){
-    alert('Πρέπει να επιλέξετε ένα username');
+  if($('#nickname').val()==''){
+    alert('Πρέπει να επιλέξετε ένα nickname');
     return;
   }
   var chooseColor = $('#chooseColor').val();
@@ -65,7 +66,7 @@ function login_to_game(){
     dataType: "json",
     headers: { "X-Token": me.token },
     contentType: 'application/json',
-    data: JSON.stringify({ nickname: $('#username').val(), piece_color: chooseColor }),
+    data: JSON.stringify({ nickname: $('#nickname').val(), piece_color: chooseColor }),
     success: login_res,
     error: login_er
   })
@@ -79,12 +80,8 @@ function login_res(data){
 }
 
 function login_er(data,y,z,c){
-  var x = data.responseJSON;
-  console.log(data);
-  console.log(x);
-  console.log(y);
-  console.log(z);
-  console.log(c);
+  var x = data.responseJSON.errormesg;
+  alert(x);
 }
 
 function update_game_status() {
@@ -104,14 +101,14 @@ function update_status(data){
 
 function reset_game(){
   $.ajax({
-      url: "connect4.php/board/reset/",
-      method: 'POST',
+      url: "connect4.php/board/",
       headers: { "X-Token": me.token },
+      method: 'POST',
       success: draw_empty_board
   });
 
   $('#game_initializer').show(2000);
-  $('#username').val("");
+  $('#nickname').val("");
   me = { nickname: null, token: null, pawn_color: null };
   update_game_status();
 
@@ -121,7 +118,7 @@ function move(){
   var $move = $('#col_move').val();
 
   $.ajax({
-      url: "connect4.php/board/move/",
+      url: "connect4.php/board/",
       method: 'PUT',
       dataType: 'json',
       headers: { "X-Token": me.token },

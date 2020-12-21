@@ -9,8 +9,9 @@
 <body>
 
 <h2>Connect 4</h2>
+<button  style="margin:20px" id='connect4_reset'> Reset</button>
 <div id='game_initializer'>
-  <input id='username'>
+  <input id='nickname'>
   <select id='chooseColor'>
     <option value='R'>Red</option>
     <option value='Y'>Yellow</option>

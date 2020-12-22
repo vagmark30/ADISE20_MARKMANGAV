@@ -30,6 +30,46 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_board` ()  BEGIN
 		update `game_status` set `status`='not active', `p_turn`=null, `result`=null;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_piece` (IN `col_num` INT, IN `color` TEXT)  move_piece:
+BEGIN
+if (SELECT piece_color FROM `board` WHERE x=6 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=6 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+if (SELECT piece_color FROM `board` WHERE x=5 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=5 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+if (SELECT piece_color FROM `board` WHERE x=4 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=4 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+if (SELECT piece_color FROM `board` WHERE x=3 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=3 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+if (SELECT piece_color FROM `board` WHERE x=2 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=2 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+if (SELECT piece_color FROM `board` WHERE x=1 AND y=col_num)IS NULL THEN
+UPDATE `board` SET piece_color=color WHERE x=1 AND y=col_num;
+UPDATE `game_status` SET p_turn=if(color='R','Y','R');
+LEAVE move_piece;
+END IF;
+
+END$$
+
 DELIMITER ;
 -- --------------------------------------------------------
 
@@ -99,7 +139,7 @@ INSERT INTO `board` (`x`, `y`, `piece_color`) VALUES
 
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
-  `p_turn` enum('R','Y') DEFAULT NULL,
+  ``p_turn`` enum('R','Y') DEFAULT NULL,
   `result` enum('Y','R','D') DEFAULT NULL,
   `last_change` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

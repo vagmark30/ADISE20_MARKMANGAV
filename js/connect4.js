@@ -75,7 +75,8 @@ function login_to_game(){
 }
 
 function login_res(data){
-  mes = data[0];
+  me = data[0];
+  console.log(me);
   $('#game_initializer').hide();
   console.log(data);
   update_game_status();
@@ -95,9 +96,25 @@ function update_game_status() {
 }
 
 function update_status(data){
-  status = data[0];
-  console.log(data);
+  status = data[0].p_turn;
+  console.log(status);
   fill_board();
+  // if (game_status.status == 'aborted') {
+  //     $('#gamepad').hide(2000);
+  //     timer = setTimeout(function() { update_game_status(); }, 4000);
+  // } else if (game_status.status == 'ended') {
+  //     $('#gamepad').hide(2000);
+  //     timer = setTimeout(function() { update_game_status(); }, 2000);
+  // } else {
+      if (status == me.piece_color && me.piece_color != null) {
+          $('#gamepad').show(2000);
+          document.getElementById("play_btn").disabled = false;
+          timer = setTimeout(function() { update_game_status(); }, 10000);
+      } else {
+          $('#gamepad').hide(2000);
+          timer = setTimeout(function() { update_game_status(); }, 4000);
+      }
+  // }
   //xrhsh toy gamepad
 }
 
@@ -117,7 +134,9 @@ function reset_game(){
 }
 
 function move(){
-  var $move = $('#col_move').val();
+  var move = $('#col_move').val();
+  var pc= me.piece_color;
+  console.log(move);
 
   $.ajax({
       url: "connect4.php/board/",
@@ -125,13 +144,15 @@ function move(){
       dataType: 'json',
       headers: { "X-Token": me.token },
       contentType: 'application/json',
-      data: JSON.stringify({ move: $move, piece_color: me.piece_color }),
+      data: JSON.stringify({ move: move, piece_color:pc }),
       success: moved,
       error: login_er
   });
+  document.getElementById("play_btn").disabled = true;
 }
 
 function moved(){
+  console.log("mphke moved");
   update_game_status();
   fill_board();
 }

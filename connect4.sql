@@ -139,7 +139,7 @@ INSERT INTO `board` (`x`, `y`, `piece_color`) VALUES
 
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
-  ``p_turn`` enum('R','Y') DEFAULT NULL,
+  `p_turn` enum('R','Y') DEFAULT NULL,
   `result` enum('Y','R','D') DEFAULT NULL,
   `last_change` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -9,6 +9,8 @@ $(function() {
     fill_board();
   	$('#connect4_login').click( login_to_game);
     $('#connect4_reset').click( reset_game);
+    $('#play_btn').click(move);
+    update_game_status();
 });
 
 function draw_empty_board(p) {
@@ -80,7 +82,7 @@ function login_res(data){
 }
 
 function login_er(data,y,z,c){
-  var x = data.responseJSON.errormesg;
+  var x = data.responseJSON;
   alert(x);
 }
 
@@ -125,7 +127,7 @@ function move(){
       contentType: 'application/json',
       data: JSON.stringify({ move: $move, piece_color: me.piece_color }),
       success: moved,
-      error: login_error
+      error: login_er
   });
 }
 

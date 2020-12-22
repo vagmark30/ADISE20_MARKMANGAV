@@ -31,7 +31,7 @@ function handle_board($method,$input){
   if($method=='GET'){
     show_board();
   }else if($method=='PUT'){
-    do_move($input);
+    move_piece($input);
   }else if ($method=='POST') {
     reset_board();
   }

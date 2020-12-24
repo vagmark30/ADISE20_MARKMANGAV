@@ -2,9 +2,9 @@
 
 function show_status(){
   global $mysqli;
+  check_abort();
 
   check_winner();
-  check_abort();
 
   $query = 'select * from game_status';
   $st = $mysqli->prepare($query);

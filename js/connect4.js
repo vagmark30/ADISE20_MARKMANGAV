@@ -98,6 +98,7 @@ function update_game_status() {
 function update_status(data){
   status = data[0].p_turn;
   console.log(status);
+  console.log(data);
   fill_board();
   // if (game_status.status == 'aborted') {
   //     $('#gamepad').hide(2000);
@@ -128,7 +129,7 @@ function reset_game(){
 
   $('#game_initializer').show(2000);
   $('#nickname').val("");
-  me = { nickname: null, token: null, pawn_color: null };
+  me = { nickname: null, token: null, piece_color: null };
   update_game_status();
 
 }

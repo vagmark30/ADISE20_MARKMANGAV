@@ -93,7 +93,6 @@ function login_res(data){
 
 function login_er(data){
   var x = data.responseJSON.errormesg;
-  console.log(data);
   alert(x);
 }
 
@@ -180,6 +179,8 @@ function moved(){
   update_game_status();
   fill_board();
 }
-function moved_err(){
-console.log(data);
+function moved_err(data){
+  var x = data.responseJSON.errormesg;
+  console.log(data);
+  alert(x);
 }

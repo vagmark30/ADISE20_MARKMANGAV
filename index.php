@@ -10,6 +10,10 @@
 
 <h2>Connect 4</h2>
 <button  style="margin:20px" id='connect4_reset'> Reset</button>
+<div id='game_info'>
+  <label id="p_name"></label>
+  <label id="p_color"></label>
+</div>
 <div id='game_initializer'>
   <input id='nickname'>
   <select id='chooseColor'>

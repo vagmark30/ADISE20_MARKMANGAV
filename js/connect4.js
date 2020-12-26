@@ -3,8 +3,10 @@ var game_status={};
 var board={};
 var last_update=new Date().getTime();
 var timer=null;
+var tempVarAlert=false;
 
 $(function() {
+    $('#game_info').hide();
     draw_empty_board();
     fill_board();
   	$('#connect4_login').click( login_to_game);
@@ -76,14 +78,22 @@ function login_to_game(){
 
 function login_res(data){
   me = data[0];
-  console.log(me);
+  var tempColor='';
   $('#game_initializer').hide();
-  console.log(data);
+  $('#game_info').show();
+  $('#p_name').text("Hey "+me.nickname);
+  if (me.piece_color=='R') {
+    tempColor="Red";
+  }else {
+    tempColor="Yellow"
+  }
+  $('#p_color').text(" you are playing as "+ tempColor);
   update_game_status();
 }
 
-function login_er(data,y,z,c){
-  var x = data.responseJSON;
+function login_er(data){
+  var x = data.responseJSON.errormesg;
+  console.log(data);
   alert(x);
 }
 
@@ -96,24 +106,38 @@ function update_game_status() {
 }
 
 function update_status(data){
-  status = data[0].p_turn;
-  console.log(status);
-  console.log(data);
+  p_turn = data[0].p_turn;
+  status = data[0].status;
   fill_board();
   // if (game_status.status == 'aborted') {
   //     $('#gamepad').hide(2000);
   //     timer = setTimeout(function() { update_game_status(); }, 4000);
-  // } else if (game_status.status == 'ended') {
-  //     $('#gamepad').hide(2000);
-  //     timer = setTimeout(function() { update_game_status(); }, 2000);
-  // } else {
-      if (status == me.piece_color && me.piece_color != null) {
+      if (status == 'ended') {
+          $('#gamepad').hide(2000);
+          if (data[0].result=='R') {
+            whoWonLbl='Red';
+          }else if(data[0].result=='Y'){
+            whoWonLbl='Yellow';
+          }
+          if (tempVarAlert==false) {
+            alert(whoWonLbl + ' won! Good game!');
+            tempVarAlert=true;
+          }
+          timer = setTimeout(function() {
+             update_game_status();
+             reset_game();
+           }, 5000);
+      } else if (p_turn == me.piece_color && me.piece_color != null) {
           $('#gamepad').show(2000);
           document.getElementById("play_btn").disabled = false;
-          timer = setTimeout(function() { update_game_status(); }, 10000);
+          timer = setTimeout(function() {
+             update_game_status();
+           }, 10000);
       } else {
           $('#gamepad').hide(2000);
-          timer = setTimeout(function() { update_game_status(); }, 4000);
+          timer = setTimeout(function() {
+             update_game_status();
+           }, 4000);
       }
   // }
   //xrhsh toy gamepad
@@ -128,6 +152,7 @@ function reset_game(){
   });
 
   $('#game_initializer').show(2000);
+  $('#game_info').hide();
   $('#nickname').val("");
   me = { nickname: null, token: null, piece_color: null };
   update_game_status();
@@ -137,7 +162,6 @@ function reset_game(){
 function move(){
   var move = $('#col_move').val();
   var pc= me.piece_color;
-  console.log(move);
 
   $.ajax({
       url: "connect4.php/board/",
@@ -147,13 +171,15 @@ function move(){
       contentType: 'application/json',
       data: JSON.stringify({ move: move, piece_color:pc }),
       success: moved,
-      error: login_er
+      error: moved_err
   });
   document.getElementById("play_btn").disabled = true;
 }
 
 function moved(){
-  console.log("mphke moved");
   update_game_status();
   fill_board();
+}
+function moved_err(){
+console.log(data);
 }

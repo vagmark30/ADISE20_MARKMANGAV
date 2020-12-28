@@ -8,7 +8,9 @@
   </head>
   <body>
     <div class="title_bar">
-      <div><h2>Score 4</h2></div>
+      <div>
+        <h2>Score 4</h2>
+      </div>
       <div class="center_btn">
         <div class="center_btn2">
           <button id='connect4_reset'>Reset</button>
@@ -16,8 +18,10 @@
       </div>
     </div>
     <div id='game_info'>
-      <label id="p_name"></label>
-      <label id="p_color"></label>
+      <div id='game_info2'>
+        <label id="p_name"></label>
+        <label id="p_color"></label>
+      </div>
     </div>
     <div id="game">
       <div id='game_initializer'>

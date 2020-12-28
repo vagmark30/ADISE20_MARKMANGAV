@@ -15,7 +15,7 @@ body {
   to {background-color: #0356fc;}
 }
 h2 {
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   color: white;
 }
@@ -41,6 +41,26 @@ h2 {
   top: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+#game_info {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-color: #0356fc;
+  margin-bottom: 10px;
+}
+#game_info2 {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+#p_name {
+  font-size: 25px;
+  color: white;
+}
+#p_color {
+  font-size: 25px;
+  color: white;
 }
 #game {
   display: flex;
@@ -127,13 +147,13 @@ select option[value="Y"] {
   position: relative;
 }
 #connect4_board TD {
-  width: 3em;
-  height: 3em;
+  width: 4em;
+  height: 4em;
   border: 3px solid blue;
-  border-radius: 25px;
+  border-radius: 40px;
   box-sizing: border-box;
   text-align:center;
   color: transparent;
   pointer-events: none;
-  background: radial-gradient(circle, transparent, transparent 15px, #007fff 20px, #007fff 23px, #1f90ff 23px, #1f90ff 36px, #007fff) center top/43px 43px;
+  background: radial-gradient(circle, transparent, transparent 15px, #007fff 50px, #007fff 50px, #1f90ff 55px, #1f90ff 60px, #007fff) center top/80px 60px;
 }

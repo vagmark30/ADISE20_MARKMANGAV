@@ -1,1 +1,139 @@
-#connect4_board TD {width: 3em; height:3em;border:1px solid black;text-align:center;}
+body {
+  margin: 0;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(transparent 70%, #0356fc);
+}
+.title_bar {
+  display: grid;
+  grid-template-columns: 95% 5%;
+  animation: mymove 50s infinite;
+}
+@keyframes mymove {
+  from {background-color: #fc7703;}
+  to {background-color: #0356fc;}
+}
+h2 {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+#connect4_reset {
+  background-color: red;
+  color: white;
+  padding: 15px 30px;
+  font-size: 25px;
+  cursor: pointer;
+  border: 3px solid red;
+  margin: 20px;
+}
+#connect4_reset:hover {
+  background-color: transparent;
+}
+.center_btn {
+  position: relative;
+}
+.center_btn2 {
+  margin: 0;
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#game {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+#game_initializer {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+#nickname {
+  height: 25px;
+  padding: 16px 24px;
+  margin: 10px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  animation: mymove 50s infinite;
+}
+#nickname::placeholder {
+  color: white;
+}
+#chooseColor {
+  height: 57px;
+  padding: 16px 24px;
+  margin: 10px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  animation: mymove 50s infinite;
+}
+select option[value="R"] {
+  background-color: red;
+}
+select option[value="Y"] {
+  background-color: yellow;
+  color: black;
+}
+#connect4_login {
+  height: 57px;
+  padding: 16px 24px;
+  margin: 10px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  animation: mymove 50s infinite;
+}
+#connect4_login:hover {
+  padding: 8px 24px;
+  font-size: 30px;
+}
+#gamepad {
+  display: flex;
+  align-items: center;
+}
+#text_move {
+  font-size: 30px;
+}
+#col_move {
+  height: 57px;
+  padding: 16px 24px;
+  margin: 10px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  animation: mymove 50s infinite;
+}
+#play_btn {
+  height: 57px;
+  padding: 16px 24px;
+  margin: 10px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  animation: mymove 50s infinite;
+}
+#board {
+  position: relative;
+}
+#connect4_board TD {
+  width: 3em;
+  height: 3em;
+  border: 3px solid blue;
+  border-radius: 25px;
+  box-sizing: border-box;
+  text-align:center;
+  color: transparent;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent, transparent 15px, #007fff 20px, #007fff 23px, #1f90ff 23px, #1f90ff 36px, #007fff) center top/43px 43px;
+}
